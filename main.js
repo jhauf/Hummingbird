@@ -85,7 +85,7 @@ function keyDown(e) {
 
 function loadBird() {
    bird.onload = function() {
-     ctx.drawImage(bird.image, 0, 350, 250, 250);
+     ctx.drawImage(bird.image, 0, 350, 220, 220);
    };
    bird.src = "images/bird.png";
    bird = createBird();
@@ -93,7 +93,7 @@ function loadBird() {
 
  function loadMate() {
     mate.onload = function() {
-      ctx.drawImage(mate.image, 0, 350, 250, 250);
+      ctx.drawImage(mate.image, 0, 350, 220, 220);
     };
     mate.src = "images/mate2.png";
     mate = createMate();
@@ -108,7 +108,7 @@ function loadBird() {
     bird.y -= MinusOrPlus * Math.random() * 10;
     mate.x += MinusOrPlus * Math.random() * 10;
     mate.y -= MinusOrPlus * Math.random() * 10;
-    ctx.drawImage(bird.image, bird.x, bird.y, 250, 250);
+    ctx.drawImage(bird.image, bird.x, bird.y, 220, 220);
     ctx.closePath();
     for (var i = 0; i < notes.length; i++) {
       var plusOrMinus = Math.random() < 0.05 ? -1 : 1;
@@ -125,8 +125,8 @@ function loadBird() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
-      if (notes.length > 20) {
-        ctx.drawImage(mate.image, mate.x, mate.y, 250, 250);
+      if (notes.length > 50) {
+        ctx.drawImage(mate.image, mate.x, mate.y, 220, 220);
       }
       ctx.closePath();
       newArray.push(note);
