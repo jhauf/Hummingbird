@@ -57,9 +57,9 @@ function loadBird() {
       let note = notes[i];
       if (Math.random() < 0.03) {
         if (Math.random() > 0.00000001) {
-          note.x += plusOrMinus * Math.random() * 50;
-        } else if (note.y < 200) {
           note.x += plusOrMinus * Math.random() * 40;
+        } else if (note.y < 200) {
+          note.x += plusOrMinus * Math.random() * 30;
         } else if (note.y < 500) {
           note.x += plusOrMinus * Math.random() * 5;
         } else {
