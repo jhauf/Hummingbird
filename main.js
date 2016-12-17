@@ -48,6 +48,7 @@ function playNote(i) {
 }
 
 function keyDown(e) {
+  document.getElementById("instructions").hidden=true;
       if (e.keyCode === 65) {
         let note = createNote(note1);
         notes.push(note);
