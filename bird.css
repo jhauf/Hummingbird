@@ -1,0 +1,13 @@
+html {
+  background-color: lightblue;
+  max-height: 50vh;
+}
+
+h1 {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 40px;
+  margin: 0px;
+
+}
