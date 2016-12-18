@@ -5,6 +5,8 @@ let images = ["images/orange.png", "images/blue.png", "images/purple.gif", "imag
 let audio = ["sounds/c.wav", "sounds/d.wav", "sounds/e.wav","sounds/f.wav","sounds/g.wav", "sounds/a.wav", "sounds/b.wav", "sounds/c-high.wav"];
 let animation;
 
+let bird = new Image();
+let mate = new Image();
 let note1 = new Image();
 let note2 = new Image();
 let note3 = new Image();
@@ -20,11 +22,8 @@ note4.src = images[3];
 note5.src = images[4];
 note6.src = images[5];
 note7.src = images[6];
-note8.src = images[7];
+note8.src = images[0];
 
-
-let bird = new Image();
-let mate = new Image();
 
 function createNote(note) {
   return {image: note, x: 300, y: 300};
@@ -41,7 +40,6 @@ function createMate() {
 document.addEventListener("DOMContentLoaded", function(event) {
   loadBird();
   loadMate();
-  animation = setInterval(animate, 5);
  });
 
 document.addEventListener("keydown", keyDown, false);
@@ -52,10 +50,13 @@ function playNote(i) {
 }
 
 function keyDown(e) {
-  document.getElementById("instructions").hidden=true;
   mate.x -= Math.random() * 10;
   mate.y += Math.random() * 5;
-      if (e.keyCode === 65) {
+      if (e.keyCode === 32) {
+        document.getElementById("instructions").hidden=true;
+        document.getElementById("instructions-words").hidden=true;
+        animation = setInterval(animate, 5);
+      } else if (e.keyCode === 65) {
         let note = createNote(note1);
         notes.push(note);
         playNote(0);
@@ -152,10 +153,10 @@ function loadBird() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
-      if ((notes.length > 10 && mate.x - bird.x < 350) && (bird.y - mate.y < 200)) {
+      if ((notes.length > 10 && mate.x - bird.x < 380) && (bird.y - mate.y < 200)) {
         clearInterval(animation);
       }
-      if (notes.length > 10) {
+      if (notes.length > 8) {
         ctx.drawImage(mate.image, mate.x, mate.y, 220, 220);
       }
       ctx.closePath();
