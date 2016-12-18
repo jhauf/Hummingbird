@@ -50,46 +50,57 @@ function playNote(i) {
 }
 
 function keyDown(e) {
+  let note;
   mate.x -= Math.random() * 10;
   mate.y += Math.random() * 5;
-      if (e.keyCode === 32) {
-        document.getElementById("instructions").hidden=true;
-        document.getElementById("instructions-words").hidden=true;
-        animation = setInterval(animate, 5);
-      } else if (e.keyCode === 65) {
-        let note = createNote(note1);
-        notes.push(note);
-        playNote(0);
-      } else if (e.keyCode === 83) {
-        let note = createNote(note2);
-        notes.push(note);
-        playNote(1);
-      } else if (e.keyCode === 68) {
-        let note = createNote(note3);
-        notes.push(note);
-        playNote(2);
-      } else if (e.keyCode === 70) {
-        let note = createNote(note4);
-        notes.push(note);
-        playNote(3);
-      } else if (e.keyCode === 74) {
-        let note = createNote(note5);
-        notes.push(note);
-        playNote(4);
-      } else if (e.keyCode === 75) {
-        let note = createNote(note6);
-        notes.push(note);
-        playNote(5);
-      } else if (e.keyCode === 76) {
-        let note = createNote(note7);
-        notes.push(note);
-        playNote(6);
-      } else if (e.keyCode === 186) {
-        let note = createNote(note8);
-        notes.push(note);
-        playNote(7);
-      }
+  switch (e.keyCode) {
+    case 32:
+      document.getElementById("instructions").hidden=true;
+      document.getElementById("instructions-words").hidden=true;
+      animation = setInterval(animate, 5);
+      break;
+    case 65:
+      note = createNote(note1);
+      notes.push(note);
+      playNote(0);
+      break;
+    case 83:
+      note = createNote(note2);
+      notes.push(note);
+      playNote(1);
+      break;
+    case 68:
+      note = createNote(note3);
+      notes.push(note);
+      playNote(2);
+      break;
+    case 70:
+      note = createNote(note4);
+      notes.push(note);
+      playNote(3);
+      break;
+    case 74:
+      note = createNote(note5);
+      notes.push(note);
+      playNote(4);
+      break;
+    case 75:
+      note = createNote(note6);
+      notes.push(note);
+      playNote(5);
+      break;
+    case 76:
+      note = createNote(note7);
+      notes.push(note);
+      playNote(6);
+      break;
+    case 186:
+      note = createNote(note8);
+      notes.push(note);
+      playNote(7);
+      break;
   }
+}
 
 function loadBird() {
    bird.onload = function() {
@@ -97,43 +108,47 @@ function loadBird() {
    };
    bird.src = "images/bird.png";
    bird = createBird();
- }
+}
 
- function loadMate() {
-    mate.onload = function() {
-      ctx.drawImage(mate.image, 15000, 10000, 220, 220);
-    };
-    mate.src = "images/mate2.png";
-    mate = createMate();
-  }
+function loadMate() {
+  mate.onload = function() {
+    ctx.drawImage(mate.image, 15000, 10000, 220, 220);
+  };
+  mate.src = "images/mate2.png";
+  mate = createMate();
+}
 
   function animate() {
     let MinusOrPlus = Math.random() < 0.49 ? -1 : 1;
     let newArray = [];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    bird.x += MinusOrPlus * Math.random() * 10;
-    bird.y -= MinusOrPlus * Math.random() * 10;
-    mate.x += MinusOrPlus * Math.random() * 10;
-    mate.y -= MinusOrPlus * Math.random() * 10;
+    let randomMovement = Math.random() * 10;
+    let movement = MinusOrPlus * Math.random() * 10;
+    bird.x += movement;
+    bird.y -= movement;
+    mate.x += movement;
+    mate.y -= movement;
+
     if (bird.y < 200) {
-      bird.y += Math.random() * 10;
+      bird.y += randomMovement;
     } else if (bird.y > 300) {
-      bird.y -= Math.random() * 10;
+      bird.y -= randomMovement;
     }
     if (bird.x < 10) {
-      bird.x += Math.random() * 10;
+      bird.x += randomMovement;
     } else if (bird.x > 400) {
-      bird.x -= Math.random() * 10;
+      bird.x -= randomMovement;
     }
 
     if (mate.y < 0) {
-      mate.y += Math.random() * 10;
+      mate.y += randomMovement;
     } else if (mate.y > 200) {
-      mate.y -= Math.random() * 10;
+      mate.y -= randomMovement;
     }
+    
     if (mate.x > 800) {
-      mate.x -= Math.random() * 10;
+      mate.x -= randomMovement;
     }
 
     ctx.drawImage(bird.image, bird.x, bird.y, 220, 220);
