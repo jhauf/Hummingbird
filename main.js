@@ -1,8 +1,8 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 let notes = [];
-let images = ["images/orange.png", "images/blue.png", "images/purple.gif", "images/red.png", "images/green.svg", "images/gray.png", "images/pink.png"];
-let audio = ["sounds/c.wav", "sounds/d.wav", "sounds/e.wav","sounds/f.wav","sounds/g.wav", "sounds/a.wav", "sounds/b.wav", "sounds/c-high.wav"];
+let images = ["images/orange.png", "images/med-blue.png", "images/purple.gif", "images/red.png", "images/green.svg", "images/gray.png", "images/pink.png", "images/dark-blue.svg"];
+let audio = ["sounds/c.wav", "sounds/d.wav", "sounds/e.wav","sounds/f.wav","sounds/g4.wav", "sounds/a.wav", "sounds/b.wav", "sounds/c-high.wav"];
 let animation;
 
 let bird = new Image();
@@ -30,7 +30,7 @@ function createNote(note) {
 }
 
 function createBird() {
-  return {image: bird, x: 0, y: 350};
+  return {image: bird, x: 0, y: 280};
 }
 
 function createMate() {
@@ -93,7 +93,7 @@ function keyDown(e) {
 
 function loadBird() {
    bird.onload = function() {
-     ctx.drawImage(bird.image, 0, 350, 220, 220);
+     ctx.drawImage(bird.image, 0, 280, 220, 220);
    };
    bird.src = "images/bird.png";
    bird = createBird();
@@ -121,7 +121,6 @@ function loadBird() {
     } else if (bird.y > 300) {
       bird.y -= Math.random() * 10;
     }
-
     if (bird.x < 10) {
       bird.x += Math.random() * 10;
     } else if (bird.x > 400) {
@@ -136,6 +135,7 @@ function loadBird() {
     if (mate.x > 800) {
       mate.x -= Math.random() * 10;
     }
+
     ctx.drawImage(bird.image, bird.x, bird.y, 220, 220);
     ctx.closePath();
     for (var i = 0; i < notes.length; i++) {
@@ -143,7 +143,7 @@ function loadBird() {
       let note = notes[i];
       if (Math.random() < 0.03) {
         if (note.y < 200) {
-          note.x += plusOrMinus * Math.random() * 5 + bird.x;
+          note.x += plusOrMinus * Math.random() * 4 + bird.x;
         } else if (note.y < 500) {
           note.x += plusOrMinus * Math.random() * 2 + bird.x;
         } else {
@@ -153,15 +153,14 @@ function loadBird() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
-      if ((notes.length > 10 && mate.x - bird.x < 380) && (bird.y - mate.y < 200)) {
+      if (notes.length > 10 && mate.x - bird.x < 380 && bird.y - mate.y < 200) {
         clearInterval(animation);
       }
-      if (notes.length > 8) {
+      if (notes.length > 10) {
         ctx.drawImage(mate.image, mate.x, mate.y, 220, 220);
       }
       ctx.closePath();
       newArray.push(note);
-
     }
     notes = newArray;
   }

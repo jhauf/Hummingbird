@@ -46,7 +46,7 @@ h4 {
 
 #instructions {
   position:absolute;
-  left: 38%;
+  left: 37%;
   top: 50%;
   z-index: 10;
 }
@@ -54,7 +54,7 @@ h4 {
 #instructions-words {
   position:absolute;
   left: 40%;
-  top: 20%;
+  top: 25%;
   z-index: 10;
   color: white;
   font-size: 30px;
