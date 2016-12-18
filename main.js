@@ -1,7 +1,7 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 let notes = [];
-let images = ["images/orange.png", "images/blue.png", "images/purple.gif", "images/red.png", "images/green.svg"];
+let images = ["images/orange.png", "images/blue.png", "images/purple.gif", "images/red.png", "images/green.svg", "images/gray.png", "images/pink.png"];
 let audio = ["sounds/c.wav", "sounds/d.wav", "sounds/e.wav","sounds/f.wav","sounds/g.wav", "sounds/a.wav", "sounds/b.wav", "sounds/c-high.wav"];
 let animation;
 
@@ -18,9 +18,9 @@ note2.src = images[1];
 note3.src = images[2];
 note4.src = images[3];
 note5.src = images[4];
-note6.src = images[2];
-note7.src = images[3];
-note8.src = images[4];
+note6.src = images[5];
+note7.src = images[6];
+note8.src = images[7];
 
 
 let bird = new Image();
@@ -35,7 +35,7 @@ function createBird() {
 }
 
 function createMate() {
-  return {image: mate, x: 800, y: 0};
+  return {image: mate, x: 700, y: 0};
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -53,7 +53,7 @@ function playNote(i) {
 
 function keyDown(e) {
   document.getElementById("instructions").hidden=true;
-  mate.x -= Math.random() * 5;
+  mate.x -= Math.random() * 10;
   mate.y += Math.random() * 5;
       if (e.keyCode === 65) {
         let note = createNote(note1);
@@ -100,7 +100,7 @@ function loadBird() {
 
  function loadMate() {
     mate.onload = function() {
-      ctx.drawImage(mate.image, 0, 0, 220, 220);
+      ctx.drawImage(mate.image, 15000, 10000, 220, 220);
     };
     mate.src = "images/mate2.png";
     mate = createMate();
@@ -152,14 +152,14 @@ function loadBird() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
+      if ((notes.length > 10 && mate.x - bird.x < 350) && (bird.y - mate.y < 200)) {
+        clearInterval(animation);
+      }
       if (notes.length > 10) {
         ctx.drawImage(mate.image, mate.x, mate.y, 220, 220);
       }
       ctx.closePath();
       newArray.push(note);
-      if ((mate.x - bird.x < 520) && (bird.y - mate.y < 150) && mate.y > 0) {
-        clearInterval(animation);
-      }
 
     }
     notes = newArray;
