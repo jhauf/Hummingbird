@@ -146,7 +146,7 @@ function loadMate() {
     } else if (mate.y > 200) {
       mate.y -= randomMovement;
     }
-    
+
     if (mate.x > 800) {
       mate.x -= randomMovement;
     }
@@ -158,7 +158,7 @@ function loadMate() {
       let note = notes[i];
       if (Math.random() < 0.03) {
         if (note.y < 200) {
-          note.x += plusOrMinus * Math.random() * 4 + bird.x;
+          note.x += plusOrMinus * Math.random() * 3 + bird.x;
         } else if (note.y < 500) {
           note.x += plusOrMinus * Math.random() * 2 + bird.x;
         } else {
