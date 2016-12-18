@@ -19,24 +19,34 @@ h4 {
   margin-top: 10px;
 }
 
-.cloud {
-  height: 200px;
-  weight: 200px;
-  position: relative;
-  bottom: 300px;
-  z-index: 0;
-}
-
 #myCanvas {
   border: 1px solid white;
   background: url("images/background.jpg") no-repeat;
   background-size: cover;
 }
 
-#instructions {
-  position: absolute;
-  top:10px;
-  right:30px;
-  height:100px;
+.header {
+  display: flex;
+  justify-content: center;
+}
 
+#bird {
+  width: 50px;
+  height: 42px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#note {
+  width: 40px;
+  height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#instructions {
+  position:absolute;
+  left: 38%;
+  top: 50%;
+  z-index: 10;
 }

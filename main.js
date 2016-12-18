@@ -3,6 +3,7 @@ let ctx = canvas.getContext("2d");
 let notes = [];
 let images = ["images/orange.png", "images/blue.png", "images/purple.gif", "images/red.png", "images/green.svg"];
 let audio = ["sounds/c.wav", "sounds/d.wav", "sounds/e.wav","sounds/f.wav","sounds/g.wav", "sounds/a.wav", "sounds/b.wav", "sounds/c-high.wav"];
+let animation;
 
 let note1 = new Image();
 let note2 = new Image();
@@ -17,6 +18,9 @@ note2.src = images[1];
 note3.src = images[2];
 note4.src = images[3];
 note5.src = images[4];
+note6.src = images[2];
+note7.src = images[3];
+note8.src = images[4];
 
 
 let bird = new Image();
@@ -31,13 +35,13 @@ function createBird() {
 }
 
 function createMate() {
-  return {image: mate, x: 600, y: 0};
+  return {image: mate, x: 800, y: 0};
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
   loadBird();
   loadMate();
-  setInterval(animate, 5);
+  animation = setInterval(animate, 5);
  });
 
 document.addEventListener("keydown", keyDown, false);
@@ -49,6 +53,8 @@ function playNote(i) {
 
 function keyDown(e) {
   document.getElementById("instructions").hidden=true;
+  mate.x -= Math.random() * 5;
+  mate.y += Math.random() * 5;
       if (e.keyCode === 65) {
         let note = createNote(note1);
         notes.push(note);
@@ -94,14 +100,14 @@ function loadBird() {
 
  function loadMate() {
     mate.onload = function() {
-      ctx.drawImage(mate.image, 0, 350, 220, 220);
+      ctx.drawImage(mate.image, 0, 0, 220, 220);
     };
     mate.src = "images/mate2.png";
     mate = createMate();
   }
 
   function animate() {
-    let MinusOrPlus = Math.random() < 0.5 ? -1 : 1;
+    let MinusOrPlus = Math.random() < 0.49 ? -1 : 1;
     let newArray = [];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -109,6 +115,26 @@ function loadBird() {
     bird.y -= MinusOrPlus * Math.random() * 10;
     mate.x += MinusOrPlus * Math.random() * 10;
     mate.y -= MinusOrPlus * Math.random() * 10;
+    if (bird.y < 200) {
+      bird.y += Math.random() * 10;
+    } else if (bird.y > 300) {
+      bird.y -= Math.random() * 10;
+    }
+
+    if (bird.x < 10) {
+      bird.x += Math.random() * 10;
+    } else if (bird.x > 400) {
+      bird.x -= Math.random() * 10;
+    }
+
+    if (mate.y < 0) {
+      mate.y += Math.random() * 10;
+    } else if (mate.y > 200) {
+      mate.y -= Math.random() * 10;
+    }
+    if (mate.x > 800) {
+      mate.x -= Math.random() * 10;
+    }
     ctx.drawImage(bird.image, bird.x, bird.y, 220, 220);
     ctx.closePath();
     for (var i = 0; i < notes.length; i++) {
@@ -126,11 +152,15 @@ function loadBird() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
-      if (notes.length > 50) {
+      if (notes.length > 10) {
         ctx.drawImage(mate.image, mate.x, mate.y, 220, 220);
       }
       ctx.closePath();
       newArray.push(note);
+      if ((mate.x - bird.x < 520) && (bird.y - mate.y < 150) && mate.y > 0) {
+        clearInterval(animation);
+      }
+
     }
     notes = newArray;
   }
