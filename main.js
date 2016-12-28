@@ -168,7 +168,7 @@ function loadMate() {
       note.y -= Math.random() * 3;
       ctx.beginPath();
       ctx.drawImage(note.image, note.x, note.y, 50, 50);
-      if (notes.length > 10 && mate.x - bird.x < 380 && bird.y - mate.y < 200) {
+      if (notes.length > 10 && mate.x - bird.x < 420 && bird.y - mate.y < 200) {
         clearInterval(animation);
       }
       if (notes.length > 10) {
